@@ -2,7 +2,7 @@
 
 ![Project Architecture Diagram](project-architecture.png)
 
-This project follows a layered DevSecOps system design.
+This project follows a layered DevSecOps Architecture.
 
 - The Kubernetes Cluster consists of one Master node and two Worker nodes.
 - Jenkins acts as the CI/CD orchestrator and manages the pipeline.
