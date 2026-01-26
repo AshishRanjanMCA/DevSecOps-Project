@@ -2,36 +2,26 @@
 
 ![Project Architecture Diagram](project-architecture.png)
 
-### Project Architecture Diagram (Logical View)
 
-[ Developer / GitHub ]
-          |
-          v
-[ Jenkins CI/CD ]
-          |
-   -------------------
-   |                 |
-[ SonarQube ]     [ Nexus ]
-   |                 |
-   -------------------
-          |
-   [ Security Scans ]
-   (Trivy / kube-audit)
-          |
-          v
-[ Kubernetes Cluster ]
-   - Master Node
-   - Worker Node 1
-   - Worker Node 2
-          |
-          v
-[ Application Running ]
-          |
-          v
-[ Monitoring Stack ]
-   - Prometheus
-   - Grafana
-   - Blackbox Exporter
+### Logical Architecture Flow (Text View)
+
+GitHub
+  ↓
+Jenkins (CI/CD)
+  ↓
+SonarQube ── Code Quality Check
+  ↓
+Nexus ── Artifact & Image Storage
+  ↓
+Trivy / kube-audit ── Security Validation
+  ↓
+Kubernetes Cluster
+  ├─ Master Node
+  └─ Worker Nodes
+  ↓
+Application Pods
+  ↓
+Prometheus → Grafana (Monitoring)
 
 
 ### Architecture Overview
