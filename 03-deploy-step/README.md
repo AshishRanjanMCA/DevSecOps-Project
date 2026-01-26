@@ -1,7 +1,7 @@
-# Deployment Stage – Kubernetes
+# Deployment Step – Kubernetes
 
 ## Purpose
-This stage is responsible for deploying the application
+This step is responsible for deploying the application
 into a Kubernetes cluster in a secure and automated manner.
 
 ## Kubernetes Cluster
