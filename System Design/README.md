@@ -2,6 +2,54 @@
 
 ![Project Architecture Diagram](project-architecture.png)
 
+### Project Architecture Diagram (Logical View)
++--------------------------------------------------+
+|              Kubernetes Cluster                  |
+|                                                  |
+|   +-------------+                                |
+|   | Master Node |                                |
+|   +-------------+                                |
+|        |                                         |
+|  -------------------------                       |
+|  |                       |                      |
+|+-----------+       +-----------+                |
+|| Worker 1  |       | Worker 2  |                |
+|+-----------+       +-----------+                |
+|                                                  |
++--------------------------------------------------+
+                ↑
+                |
+        Deployment via kubectl
+                |
++--------------------------------------------------+
+|                DevOps Tools Layer                |
+|                                                  |
+|   +-----------+                                  |
+|   | Jenkins   |  (CI/CD Orchestrator)            |
+|   +-----------+                                  |
+|     |       |                                    |
+|     |       +------------------+                 |
+|     |                          |                 |
+|+------------+          +------------+            |
+|| SonarQube  |          |   Nexus    |            |
+|| Code Scan  |          | Artifacts  |            |
+|+------------+          +------------+            |
+|                                                  |
++--------------------------------------------------+
+                |
+                | Metrics & Health Data
+                ↓
++--------------------------------------------------+
+|               Monitoring Layer                   |
+|                                                  |
+|      Prometheus  <---- metrics collection        |
+|            |                                     |
+|         Grafana  ----> dashboards                |
+|                                                  |
++--------------------------------------------------+
+
+### Architecture Overview
+
 This project follows a layered DevSecOps Architecture.
 
 - The Kubernetes Cluster consists of one Master node and two Worker nodes.
