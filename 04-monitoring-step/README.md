@@ -1,4 +1,4 @@
-# 04 – Monitoring & Observability Step
+# Monitoring & Observability Step
 
 ## Purpose
 The **Monitoring & Observability Step** provides continuous visibility into application health, system performance, and service availability.  
