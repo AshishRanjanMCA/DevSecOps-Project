@@ -8,6 +8,7 @@ pipeline {
     
     environment {
         SCANNER_HOME = tool 'sonar-scanner'
+	IMAGE_TAG = "${env.BUILD_NUMBER}"
     }
 
     stages {
@@ -72,18 +73,18 @@ pipeline {
         }
         stage('Build Docker Image') {
             steps {
-                    sh 'docker build -t adi35tya/boardgameapp:latest .'
+                    sh 'docker build -t adi35tya/boardgameapp:${IMAGE_TAG} .'
             }
         }
         stage('Docker Image Scanning') {
             steps {
-                sh 'trivy image --format table -o trivy-image-report.html adi35tya/boardgameapp:latest'
+                sh 'trivy image --format table -o trivy-image-report.html adi35tya/boardgameapp:${IMAGE_TAG}'
             }
         }
         stage('Push Docker Image') {
             steps {
                 withDockerRegistry(credentialsId: 'dockerhub-cred', url: 'https://index.docker.io/v1/') {
-                    sh 'docker push adi35tya/boardgameapp:latest'
+                    sh 'docker push adi35tya/boardgameapp:${IMAGE_TAG}'
                 }
             }
         }
@@ -91,7 +92,10 @@ pipeline {
         stage('Deploy to Kubernetes') {
             steps {
                 withKubeConfig(caCertificate: '', clusterName: 'kubernetes', contextName: '', credentialsId: 'k8s-cred', namespace: 'webapps', restrictKubeConfigAccess: false, serverUrl: 'https://172.31.31.230:6443') {
-                    sh 'kubectl apply -f deployment-service.yaml'
+                    sh '''
+                      sed -i "s|__IMAGE_TAG__|${IMAGE_TAG}|g" deployment-service.yaml
+                      kubectl apply -f deployment-service.yaml
+                    '''
                 }
             }
         }
@@ -144,4 +148,6 @@ pipeline {
             }
         }
     }
+
+
 
