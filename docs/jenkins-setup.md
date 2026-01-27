@@ -1,9 +1,4 @@
 
----
-
-# docs/jenkins-setup.md
-
-```md
 # Jenkins Setup
 
 This document explains the installation and configuration of **Jenkins** as the CI/CD orchestrator.
