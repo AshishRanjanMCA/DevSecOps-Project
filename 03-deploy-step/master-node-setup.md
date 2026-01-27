@@ -41,9 +41,3 @@ Starts core Kubernetes components
 After initialization, kubeadm generates a join command that is used by worker nodes to connect to the cluster:
 
 kubeadm join <master-ip>:6443 --token <token> --discovery-token-ca-cert-hash sha256:<hash>
----
-
-## Outcome
-- Kubernetes control plane is successfully initialized
-- API server is accessible
-- Worker nodes can join the cluster using the generated command
