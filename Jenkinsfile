@@ -8,7 +8,7 @@ pipeline {
     
     environment {
         SCANNER_HOME = tool 'sonar-scanner'
-	IMAGE_TAG = "${env.BUILD_NUMBER}"
+	    IMAGE_TAG = "${env.BUILD_NUMBER}"
     }
 
     stages {
@@ -91,7 +91,7 @@ pipeline {
         
         stage('Deploy to Kubernetes') {
             steps {
-                withKubeConfig(caCertificate: '', clusterName: 'kubernetes', contextName: '', credentialsId: 'k8s-cred', namespace: 'webapps', restrictKubeConfigAccess: false, serverUrl: 'https://172.31.31.230:6443') {
+                withKubeConfig(caCertificate: '', clusterName: 'kubernetes', contextName: '', credentialsId: 'k8s-cred', namespace: 'webapps', restrictKubeConfigAccess: false, serverUrl: 'https://172.31.24.163:6443') {
                     sh '''
                       sed -i "s|__IMAGE_TAG__|${IMAGE_TAG}|g" deployment-service.yaml
                       kubectl apply -f deployment-service.yaml
@@ -101,7 +101,7 @@ pipeline {
         }
         stage('verify the deployment') {
             steps {
-                withKubeConfig(caCertificate: '', clusterName: 'kubernetes', contextName: '', credentialsId: 'k8s-cred', namespace: 'webapps', restrictKubeConfigAccess: false, serverUrl: 'https://172.31.31.230:6443') {
+                withKubeConfig(caCertificate: '', clusterName: 'kubernetes', contextName: '', credentialsId: 'k8s-cred', namespace: 'webapps', restrictKubeConfigAccess: false, serverUrl: 'https://172.31.24.163:6443') {
                     sh 'kubectl get pods -n webapps'
                     sh 'kubectl get svc -n webapps'
                 }
@@ -148,6 +148,3 @@ pipeline {
             }
         }
     }
-
-
-
