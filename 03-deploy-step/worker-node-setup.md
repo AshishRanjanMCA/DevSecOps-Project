@@ -30,9 +30,3 @@ Join the worker node to the Kubernetes cluster using the command generated on th
 ```bash
 kubeadm join <master-ip>:6443 --token <token> --discovery-token-ca-cert-hash sha256:<hash>
 
----
-## Outcome
-
-- Worker node is successfully registered with the Kubernetes cluster
-- Node is ready to run application Pods
-- Kubernetes can schedule workloads on the worker node
