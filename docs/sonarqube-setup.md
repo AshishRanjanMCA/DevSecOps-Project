@@ -13,11 +13,11 @@ This document covers the setup of **SonarQube** for static code quality analysis
   
 ## Configuration
 
-Access SonarQube via port 9000
+- Access SonarQube via port 9000
 
-Configure quality gates
+- Configure quality gates
 
-Integrate SonarQube with Jenkins pipeline
+- Integrate SonarQube with Jenkins pipeline
 
 ## Outcome
 
